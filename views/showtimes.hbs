@@ -1,0 +1,110 @@
+<h1>Showtimes</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            <th>Showtime ID</th>
+            <th>Showtime Date</th>
+            <th>Showtime Time</th>
+            <th>Movie Title</th>
+            <th>Screen Number</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{#each showtimes}}
+        <tr>
+            <td>{{this.showtimeID}}</td>
+            <td>{{this.showDate}}</td>
+            <td>{{this.startTime}}</td>
+            <td>{{this.movieTitle}}</td>
+            <td>{{this.screenNumber}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_showtime_form'>
+                <input type='hidden' name='delete_showtime_id' value='{{this.showtimeID}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Showtime</h2>
+<form class='cuForm' id='create_showTime_form'>
+    <label for='create_showTime_showDate'>Show Date: </label>
+    <input type='date' name='create_showTime_showDate' id='create_showTime_showDate' required />
+
+    <label for='create_showTime_startTime'>Start Time: </label>
+    <input type='time' name='create_showTime_startTime' id='create_showTime_startTime' required />
+
+    <label for='create_movieTime'>Movie: </label>
+    <select name='create_movieTime' id='create_movieTime'>
+        <option value='NULL' selected>Select Movie</option>
+        {{#each movies}}
+        <option value='{{this.movieID}}' required>{{this.title}}</option>
+        {{/each}}
+    </select>
+
+   
+    <label for='create_time_screenNumber'>Screen: </label>
+    <select name='create_time_screenNumber' id='create_time_screenNumber'>
+        <option value='NULL' selected>Select Screen</option>
+        {{#each screens}}
+        <option value='{{this.screenID}}' required>{{this.screenNumber}}</option>
+        {{/each}}
+    </select>
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Showtime</h2>
+<form class='cuForm' id='update_showtime_form'>
+    <label for='update_showtime_id'>Showtime to Update: </label>
+    <select name='update_showtime_id' id='update_person_id' required>
+        <option value='' disabled selected>Select Showtime ID</option>
+        {{#each showtimes}}
+        <option value='{{this.showtimeID}}' required>
+            {{this.showtimeID}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_showTime_time'>Show Date: </label>
+    <input type='date' name='update_showTime_time' id='update_showTime_time' />
+
+    <label for='update_showTime_startTime'>Start Time: </label>
+    <input type='time' name='update_showTime_startTime' id='update_showTime_startTime' />
+
+    <label for='update_movieTitle'>Movie: </label>
+    <select name='update_movieTitle' id='update_movieTitle'>
+        <option value='NULL' selected>Select Movie</option>
+        {{#each movies}}
+        <option value='{{this.movieID}}' required>
+            {{this.title}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_showTime_screenNumber'>Screen: </label>
+    <select name='update_showTime_screenNumber' id='update_showTime_screenNumber'>
+        <option value='NULL' selected>Select Screen</option>
+        {{#each screens}}
+        <option value='{{this.screenID}}' required>
+            {{this.screenNumber}}
+        </option>
+        {{/each}}
+    </select>
+
+
+    <input type='submit' />
+</form>

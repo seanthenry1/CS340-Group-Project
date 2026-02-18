@@ -1,0 +1,65 @@
+<h1>Screens</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            <th>Screen ID</th>
+            <th>Screen Number</th>
+            <th>Seating Capacity</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, scree number, and seating capacity }}
+        {{#each screens}}
+        <tr>
+            <td>{{this.screenID}}</td>
+            <td>{{this.screenNumber}}</td>
+            <td>{{this.seatingCapacity}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_screen_form'>
+                <input type='hidden' name='delete_screen_id' value='{{this.screenId}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Screen</h2>
+<form class='cuForm' id='create_screen_form'>
+    <label for='create_screen_number'>Screen Number: </label>
+    <input type='number' name='create_screen_number' id='create_screen_number' required />
+
+    <label for='create_screen_seating_cap'>Seating Capacity:</label>
+    <input type='number' name='create_person_age' id='create_person_age' min='0' />
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Screen</h2>
+<form class='cuForm' id='update_screen_form'>
+    <label for='update_screen_id'>Screen to Update: </label>
+    <select name='update_screen_id' id='update_screen_id' required>
+        <option value='' disabled selected>Select a Screen</option>
+        {{#each screens}}
+        <option value='{{screenNumber}}' required>
+            {{this.screenNumber}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_screen_seating_cap'>Seating Capacity: </label>
+    <input type='number' name='update_screen_seating_cap' id='update_screen_seating_cap' min='0' />
+
+    <input type='submit' />
+</form>

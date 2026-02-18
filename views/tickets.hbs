@@ -1,0 +1,87 @@
+<h1>Tickets</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            <th>Ticket ID</th>
+            <th>Purchase Date</th>
+            <th>Ticket Price</th>
+            <th>Show Time Label</th>
+            <th>Customer Name</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{#each tickets}}
+        <tr>
+            <td>{{this.ticketID}}</td>
+            <td>{{this.purchaseDate}}</td>
+            <td>{{this.ticketPrice}}</td>
+            <td>{{this.showtimeLabel}}</td>
+            <td>{{this.customerName}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_ticket_form'>
+                <input type='hidden' name='delete_ticket_id' value='{{this.ticketID}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Ticket</h2>
+<form class='cuForm' id='create_ticket_form'>
+   <label for='create_ticket_purchaseDate'>Purchase Date: </label>
+    <input type='date' name='create_showTime_showDate' id='create_showTime_showDate' required />
+
+    <label for='create_ticket_purchasePrice'>Purchase Price: </label>
+    <input type='decimal' name='create_ticket_purchasePrice' id='create_ticket_purchasePrice' />
+
+    <label for='select_ticket_showtimeID'>Showtime ID: </label>
+    <select name='select_ticket_showtimeID' id='select_ticket_showtimeID'>
+        <option value='NULL' selected>Select Showtime ID</option>
+        {{#each showtimes}}
+        <option value='{{this.showtimeID}}' required>
+            {{this.showtimeID}}</option>
+        {{/each}}
+    </select>
+
+    <label for='select_ticket_customerID'>Customer ID: </label>
+    <select name='select_ticket_customerID' id='select_ticket_customerID'>
+        <option value='NULL' selected>Select Customer ID</option>
+        {{#each customers}}
+        <option value='{{this.customerID}}' required>
+            {{this.customerID}}</option>
+        {{/each}}
+    </select>
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Ticket</h2>
+<form class='cuForm' id='update_ticket_form'>
+    <label for='update_ticket_id'>Ticket to Update: </label>
+    <select name='update_ticket_id' id='update_ticket_id' required>
+        <option value='' disabled selected>Select a Ticket ID</option>
+        {{#each tickets}}
+        <option value='{{this.ticketID}}' required>
+            {{this.ticketID}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_ticket_print'>Ticket Price: </label>
+    <input type='decimal' name='update_ticket_price' id='update_ticket_price' min='0' />
+
+    <input type='submit' />
+</form>

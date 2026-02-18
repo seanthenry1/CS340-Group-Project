@@ -1,0 +1,80 @@
+<h1>Movies</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            <th>Movie ID</th>
+            <th>Movie Title</th>
+            <th>Movie Genre</th>
+            <th>Movie Duration</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, title, genre, and duration }}
+        {{#each movies}}
+        <tr>
+            <td>{{this.movieID}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.genre}}</td>
+            <td>{{this.duration}}</td>
+          
+
+            {{! DELETE form }}
+            <form id='delete_movie_form'>
+                <input type='hidden' name='delete_movie_id' value='{{this.movieID}}' />
+                <input type='hidden' name='delete_movie_title' value='{{this.title}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Add a Movie</h2>
+<form class='cuForm' id='create_movie_form'>
+    <label for='create_movie_title'>Title: </label>
+    <input type='text' name='create_movie_title' id='create_movie_title' required />
+
+    <label for='create_movie_genre'>Genre: </label>
+    <input type='text' name='create_movie_genre' id='create_movie_genre' />
+
+    <label for='create_movie_duration'>Duration:</label>
+    <input type='number' name='create_move_duration' id='create_move_duration' min='0' />
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Movie</h2>
+<form class='cuForm' id='update_movie_form'>
+    <label for='update_movie_id'>Movie to Update: </label>
+    <select name='update_movie_id' id='movie_person_id' required>
+        <option value='' disabled selected>Select a Movie</option>
+        {{#each movies}}
+        <option value='{{this.movieID}}' required>
+            {{this.movieID}}
+            -
+            {{this.title}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_movie_title'>Title: </label>
+    <input type='text' genre='update_move_title' id='update_movie_title' />
+
+    <label for='update_movie_genre'>Genre: </label>
+    <input type='text' genre='update_move_genre' id='update_movie_genre' />
+
+    <label for='update_movie_duration'>Duration: </label>
+    <input type='number' name='update_movie_duration' id='update_movie_duration' min='0' />
+
+    <input type='submit' />
+</form>
