@@ -3,7 +3,7 @@
 {{! READ table }}
 <table>
     <thead>
-        {{! For the table header row, we print the DB attribute names }}
+         {{! For the table header row }}
         <tr>
             <th>Showtime ID</th>
             <th>Showtime Date</th>
@@ -14,7 +14,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! For each row, print the id, show date, state time, movie title and screen number }}
         {{#each showtimes}}
         <tr>
             <td>{{this.showtimeID}}</td>

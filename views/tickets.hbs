@@ -3,7 +3,7 @@
 {{! READ table }}
 <table>
     <thead>
-        {{! For the table header row, we print the DB attribute names }}
+        {{! For the table header row }}
         <tr>
             <th>Ticket ID</th>
             <th>Purchase Date</th>
@@ -14,7 +14,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! For each row}}
         {{#each tickets}}
         <tr>
             <td>{{this.ticketID}}</td>
@@ -82,6 +82,15 @@
 
     <label for='update_ticket_print'>Ticket Price: </label>
     <input type='decimal' name='update_ticket_price' id='update_ticket_price' min='0' />
+
+    <label for='select_ticket_showtimeID'>Showtime ID: </label>
+    <select name='select_ticket_showtimeID' id='select_ticket_showtimeID'>
+        <option value='NULL' selected>Select Showtime ID</option>
+        {{#each showtimes}}
+        <option value='{{this.showtimeID}}' required>
+            {{this.showtimeID}}</option>
+        {{/each}}
+    </select>
 
     <input type='submit' />
 </form>

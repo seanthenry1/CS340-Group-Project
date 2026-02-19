@@ -3,7 +3,7 @@
 {{! READ table }}
 <table>
     <thead>
-        {{! For the table header row, we print the DB attribute names }}
+         {{! For the table header row }}
         <tr>
             <th>Screen ID</th>
             <th>Screen Number</th>
@@ -12,7 +12,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, scree number, and seating capacity }}
+        {{! For each row, print the id, screen number, and seating capacity }}
         {{#each screens}}
         <tr>
             <td>{{this.screenID}}</td>

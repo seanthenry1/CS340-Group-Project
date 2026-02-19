@@ -35,7 +35,6 @@ app.get('/', async function (req, res) {
 app.get('/movies', async function (req, res) {
     try {
         // Create and execute our queries
-        // In query1, we use SELECT to display all movies and ORDER BY title in ascending order.
         const query1 = 'SELECT * FROM Movies ORDER BY title ASC;';
         const [movies] = await db.query(query1);
 
@@ -53,12 +52,10 @@ app.get('/movies', async function (req, res) {
 app.get('/screens', async function (req, res) {
     try {
         // Create and execute our queries
-        // In query1, we use a JOIN clause to display the names of the homeworlds
         const query1 = 'SELECT * FROM Screens;';
         const [screens] = await db.query(query1);
 
-        // Render the bsg-people.hbs file, and also send the renderer
-        //  an object that contains our bsg_people and bsg_homeworld information
+        // Render screens.hbs file
         res.render('screens', { screens: screens});
     } catch (error) {
         console.error('Error executing queries:', error);
@@ -72,7 +69,6 @@ app.get('/screens', async function (req, res) {
 app.get('/showtimes', async function (req, res) {
     try {
         // Create and execute our queries
-        // In query1, we use a JOIN clause to display the names of the homeworlds
         const query1 = `SELECT Showtimes.showtimeID, Showtimes.showDate, Showtimes.startTime, 
                         Movies.title AS movieTitle, Screens.screenNumber as screenNumber FROM Showtimes   
                         JOIN Movies ON Showtimes.movieID = Movies.movieID
@@ -88,8 +84,7 @@ app.get('/showtimes', async function (req, res) {
         const [movies] = await db.query(query2);
         const [screens] = await db.query(query3);
 
-        // Render the bsg-people.hbs file, and also send the renderer
-        //  an object that contains our bsg_people and bsg_homeworld information
+        // Render showtimes.hbs file.
         res.render('showtimes', { showtimes:showtimes, movies:movies, screens:screens});
     } catch (error) {
         console.error('Error executing queries:', error);
@@ -123,7 +118,6 @@ app.get('/customers', async function (req, res) {
 app.get('/tickets', async function (req, res) {
     try {
         // Create and execute our queries
-        // In query1, we use a JOIN clause to display the names of the homeworlds
         const query1 = `SELECT Tickets.ticketID, Tickets.purchaseDate, Tickets.ticketPrice,
                         CONCAT(Movies.title,' - ', Showtimes.showDate,' ',Showtimes.startTime) AS showtimeLabel,
                         Customers.name AS customerName FROM Tickets
@@ -146,8 +140,7 @@ app.get('/tickets', async function (req, res) {
         const [showtimes] = await db.query(query2);
         const [customers] = await db.query(query3);
 
-        // Render the bsg-people.hbs file, and also send the renderer
-        //  an object that contains our bsg_people and bsg_homeworld information
+        // Render the tickets.hbs file
         res.render('tickets', { tickets:tickets, showtimes:showtimes, customers:customers });
     } catch (error) {
         console.error('Error executing queries:', error);
